@@ -47,12 +47,12 @@ jobs:
           docker push ${{ secrets.AWS_ECR_REPO_URI }}:latest
 
       # Step 7: Set up kubectl for EKS
-      - name: Set up kubectl
-        uses: aws-actions/eks-kubeconfig-action@v1
-        with:
-          cluster-name: ${{ secrets.EKS_CLUSTER_NAME }}
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          region: ${{ secrets.AWS_REGION }}
+      # - name: Set up kubectl
+      #   uses: aws-actions/eks-kubeconfig-action@v1
+      #   with:
+      #     cluster-name: ${{ secrets.EKS_CLUSTER_NAME }}
+      #     role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+      #     region: ${{ secrets.AWS_REGION }}
       - name: Update kubeconfig
         run: aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
 
