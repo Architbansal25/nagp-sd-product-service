@@ -45,3 +45,16 @@ jobs:
       - name: Push Docker image to Amazon ECR
         run: |
           docker push ${{ secrets.AWS_ECR_REPO_URI }}:latest
+
+      # Step 7: Set up kubectl for EKS
+      - name: Set up kubectl
+        uses: aws-actions/eks-kubeconfig-action@v1
+        with:
+          cluster-name: ${{ secrets.EKS_CLUSTER_NAME }}
+          role-to-assume: ${{ secrets.GITHUB_ACTIONS_ROLE_ARN }}
+          region: ${{ secrets.AWS_REGION }}
+
+      # Step 8: Apply Kubernetes resources (Deployment and Service)
+      - name: Deploy app to EKS
+        run: |
+          kubectl apply -f k8s/product-service.yaml
