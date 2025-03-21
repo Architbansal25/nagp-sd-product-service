@@ -51,10 +51,10 @@ jobs:
         uses: aws-actions/eks-kubeconfig-action@v1
         with:
           cluster-name: ${{ secrets.EKS_CLUSTER_NAME }}
-          role-to-assume: ${{ secrets.GITHUB_ACTIONS_ROLE_ARN }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           region: ${{ secrets.AWS_REGION }}
       - name: Update kubeconfig
-        run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
+        run: aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
 
       # Step 8: Apply Kubernetes resources (Deployment and Service)
       - name: Deploy app to EKS
