@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service
+  namespace: webcart
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-service
+  template:
+    metadata:
+      labels:
+        app: product-service
+    spec:
+      containers:
+        - name: product-service
+          image: archit1150/productservice:latest
+          ports:
+            - containerPort: 9091
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+  namespace: webcart
+spec:
+  selector:
+    app: product-service
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9091
+  type: NodePort
