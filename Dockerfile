@@ -4,8 +4,12 @@ FROM maven:3.9.4-eclipse-temurin-17 AS builder
 # Set working directory
 WORKDIR /build
 
-ENV JDBC_USER=$JDBCUSER
-ENV JDBC_PASSWORD=$JDBCPASS
+# Accept build arguments (only available at build time, not at runtime)
+ARG JDBC_USER
+ARG JDBC_PASSWORD
+
+ENV JDBC_USER=$JDBC_USER
+ENV JDBC_PASSWORD=$JDBC_PASSWORD
 
 # Copy pom.xml and download dependencies first (to leverage Docker cache)
 COPY pom.xml .
