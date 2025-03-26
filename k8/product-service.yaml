@@ -15,9 +15,20 @@ spec:
     spec:
       containers:
         - name: product-service
-          image: 039612866426.dkr.ecr.ap-south-1.amazonaws.com/nagp:latest
+          image: archit1150/productservice:latest
           ports:
             - containerPort: 9091
+          env:
+            - name: JDBC_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: product-service-config
+                  key: JDBC_USER
+            - name: JDBC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: product-service-secret
+                  key: JDBC_PASSWORD
 
 ---
 apiVersion: v1
