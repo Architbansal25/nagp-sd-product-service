@@ -22,8 +22,8 @@ COPY src ./src
 # Build the JAR
 RUN mvn clean install -DskipTests
 
-# Stage 2: Run the application with slim JDK
-FROM openjdk:17-jdk-slim
+# Stage 2: Run the application with slim JRE
+FROM eclipse-temurin:17-jre-jammy
 
 # Set working directory
 WORKDIR /app
