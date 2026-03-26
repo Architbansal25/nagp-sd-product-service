@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: product-service
-          image: 039612866426.dkr.ecr.ap-south-1.amazonaws.com/nagp:latest
+          image: 978430483281.dkr.ecr.ap-south-1.amazonaws.com/ecr-webkart:latest
           ports:
             - containerPort: 9091
           env:
